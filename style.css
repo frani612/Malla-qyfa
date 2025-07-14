@@ -1,40 +1,64 @@
 body {
   font-family: Arial, sans-serif;
   padding: 20px;
-  background: #f9f9fb;
-  color: #3a2a52;
+  background: #fff0f6;
+  color: #4a0033;
 }
 
 h1 {
-  color: #7b68ee; /* lavanda más oscuro */
+  color: #d95ca4;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
+h2 {
+  color: #a64d7e;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+/* Contenedor de la lista: usamos grid para que cada ramo sea una tarjeta */
 ul {
   list-style-type: none;
   padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
 }
 
+/* Cada ramo como tarjeta cuadrada */
 li {
-  border: 2px solid #7b68ee; /* borde lavanda */
-  border-radius: 8px;
-  background-color: #e6e6fa; /* lavanda claro */
-  padding: 12px 15px;
-  margin: 8px 0;
+  border: 2px solid #d95ca4;
+  border-radius: 10px;
+  background-color: #f9c8dc; /* lavanda claro */
+  padding: 20px;
   cursor: pointer;
   user-select: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  color: #3a2a52;
+  color: #4a0033;
+  font-weight: 600;
+  text-align: center;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease;
+}
+
+li:hover:not(.bloqueado) {
+  background-color: #e199c2; /* lavanda más fuerte al pasar el mouse */
+  transform: scale(1.05);
 }
 
 li.tachado {
   text-decoration: line-through;
-  color: #a6366a; /* rosado oscuro */
-  background-color: #f8c8d8; /* rosado suave */
+  color: #6e0f4e; /* rosado oscuro */
+  background-color: #f2a8ce; /* rosa suave */
 }
 
 li.bloqueado {
-  background-color: #d3d3d3; /* gris claro */
-  border-color: #a9a9a9; /* gris más oscuro */
-  color: #7a7a7a; /* texto gris */
+  background-color: rgba(169, 169, 169, 0.4); /* gris claro transparente */
+  border-color: rgba(122, 122, 122, 0.4);
+  color: rgba(122, 122, 122, 0.6);
   cursor: not-allowed;
+  pointer-events: none; /* desactiva interacción */
 }
