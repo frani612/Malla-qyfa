@@ -17,19 +17,19 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   function actualizarEstados() {
+    // Primero desbloqueamos todos los ramos que cumplen prerrequisitos (incluidos los que no tienen)
     ramos.forEach(ramo => {
-      if (ramo.classList.contains('tachado')) {
-        desbloquearRamos(ramo.dataset.abre);
+      if (cumplePrerrequisitos(ramo)) {
+        desbloquearRamo(ramo);
+      } else {
+        bloquearRamo(ramo);
       }
     });
 
+    // Luego desbloqueamos los ramos que abren los ramos tachados
     ramos.forEach(ramo => {
-      if (!cumplePrerrequisitos(ramo)) {
-        if (!ramo.classList.contains('tachado')) {
-          bloquearRamo(ramo);
-        }
-      } else {
-        desbloquearRamo(ramo);
+      if (ramo.classList.contains('tachado')) {
+        desbloquearRamos(ramo.dataset.abre);
       }
     });
   }
@@ -46,13 +46,16 @@ window.addEventListener('DOMContentLoaded', () => {
   function cumplePrerrequisitos(ramo) {
     const id = ramo.dataset.id;
 
+    // Encuentra todos los ramos que "abren" este ramo
     const prerrequisitos = ramos.filter(r => {
       if (!r.dataset.abre) return false;
       return r.dataset.abre.split(' ').includes(id);
     });
 
+    // Si no tiene prerrequisitos, cumple siempre
     if (prerrequisitos.length === 0) return true;
 
+    // Si tiene prerrequisitos, todos deben estar tachados
     return prerrequisitos.every(r => r.classList.contains('tachado'));
   }
 
