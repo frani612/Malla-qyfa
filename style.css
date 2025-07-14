@@ -62,7 +62,7 @@ li:hover:not(.bloqueado) {
 li.tachado {
   text-decoration: line-through;
   color: #6e0f4e;
-  background-color: #f2a8ce;
+  background-color: #b9a0d9; /* lavanda */
 }
 
 li.bloqueado {
