@@ -3,16 +3,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function cumplePrerrequisitos(ramo) {
     const id = ramo.dataset.id;
-    // Buscamos ramos que "abren" este ramo (prerrequisitos)
     const prerrequisitos = ramos.filter(r => {
       if (!r.dataset.abre) return false;
-      // ¿Está el id actual en el arreglo de ids que desbloquea r?
+      if (r.dataset.abre.trim() === '') return false;
       return r.dataset.abre.split(' ').includes(id);
     });
-    // Si no tiene prerrequisitos, está desbloqueado
     if (prerrequisitos.length === 0) return true;
-
-    // Todos los prerrequisitos deben estar tachados para desbloquear
     return prerrequisitos.every(r => r.classList.contains('tachado'));
   }
 
@@ -41,7 +37,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Al cargar, actualizar estados
   actualizarEstados();
 
   ramos.forEach(ramo => {
@@ -50,9 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
         alert('Este ramo está bloqueado. Completa los prerrequisitos primero.');
         return;
       }
-
       ramo.classList.toggle('tachado');
-
       actualizarEstados();
     });
   });
