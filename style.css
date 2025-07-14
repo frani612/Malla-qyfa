@@ -4,62 +4,61 @@ body {
   background: #fff0f6;
   color: #4a0033;
 }
+
 h1 {
   color: #d95ca4;
-  text-align: center;
-  margin-bottom: 30px;
 }
-.malla-container {
+
+.semana-container {
   display: flex;
   gap: 20px;
+  flex-wrap: nowrap;
   overflow-x: auto;
   padding-bottom: 10px;
+  margin-bottom: 30px;
 }
-.semestre {
+
+.semana {
+  background-color: #e6e6fa; /* lavanda suave */
+  padding: 15px;
+  border-radius: 12px;
+  min-width: 200px;
+  box-shadow: 0 2px 8px rgba(150, 100, 150, 0.2);
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  min-width: 180px;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
 }
-.semestre h2 {
-  color: #a64d7e;
-  margin-bottom: 15px;
-  text-align: center;
+
+.semana h2 {
+  margin-bottom: 12px;
+  color: #663399; /* un morado más intenso */
 }
-ul {
-  padding-left: 0;
-  margin: 0;
-}
+
 li {
-  list-style: none;
+  list-style-type: none;
   border: 2px solid #d95ca4;
   border-radius: 10px;
-  background-color: #e6d5f7; /* lavanda claro para desbloqueados */
-  padding: 15px;
+  background-color: #e6e6fa; /* lavanda suave */
+  padding: 12px 15px;
+  margin: 8px 0;
   cursor: pointer;
-  user-select: none;
-  color: #4a0033;
-  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
   text-align: center;
-  min-height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease;
 }
-li:hover:not(.bloqueado) {
-  background-color: #d1b8f2;
-  transform: scale(1.05);
-}
+
 li.tachado {
   text-decoration: line-through;
-  color: #6e0f4e;
-  background-color: ##f7c6c7
+  background-color: #f7c6c7; /* rosa pastel para tachado */
+  color: #9b2a45; /* un rosa oscuro para el texto */
 }
+
 li.bloqueado {
-  background-color: #d3d3d3; /* gris */
-  border-color: #a9a9a9;
-  color: #777;
+  background-color: #cccccc; /* gris para bloqueado */
+  border-color: #999999;
+  color: #666666;
   cursor: not-allowed;
-  pointer-events: none;
 }
