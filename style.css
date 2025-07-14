@@ -1,113 +1,54 @@
-/* Estilo general del body */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #ffe6f0; /* Fondo rosado claro */
-  overflow-x: auto;
-  overflow-y: hidden;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+window.addEventListener('DOMContentLoaded', () => {
+  const ramos = Array.from(document.querySelectorAll('li'));
 
-/* Título principal */
-h1 {
-  text-align: center;
-  margin: 20px 0;
-  color: #aa336a;
-}
+  function cumplePrerrequisitos(ramo) {
+    const id = ramo.dataset.id;
 
-/* Contenedor principal en scroll horizontal */
-.malla-container {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  height: 100%;
-  padding: 20px;
-  gap: 20px;
-  box-sizing: border-box;
-}
+    const prerrequisitos = ramos.filter(r => {
+      if (!r.dataset.abre || r.dataset.abre.trim() === '') return false;
+      const abreIds = r.dataset.abre.trim().split(/\s+/);
+      return abreIds.includes(id);
+    });
 
-/* Cada semestre */
-.semestre {
-  min-width: 250px;
-  background-color: #ffe0eb; /* Fondo del cuadro de semestre */
-  border-radius: 15px;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
+    if (prerrequisitos.length === 0) return true;
 
-.semestre h2 {
-  text-align: center;
-  color: #b30059;
-  font-size: 1.2em;
-}
+    return prerrequisitos.every(r => r.classList.contains('tachado'));
+  }
 
-.semestre ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+  function bloquearRamo(ramo) {
+    ramo.classList.add('bloqueado');
+    ramo.classList.remove('tachado');
+    ramo.style.pointerEvents = 'none';
+    ramo.style.cursor = 'not-allowed';
+  }
 
-/* Estilo de los ramos como botones */
-li {
-  background-color: #ffb6d5; /* Rosado fuerte desbloqueado */
-  border: none;
-  padding: 15px;
-  margin: 0;
-  border-radius: 10px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.15s ease-in-out;
-  user-select: none;
-}
+  function desbloquearRamo(ramo) {
+    ramo.classList.remove('bloqueado');
+    ramo.style.pointerEvents = 'auto';
+    ramo.style.cursor = 'pointer';
+  }
 
-li:hover {
-  background-color: #ff94c2;
-}
+  function actualizarEstados() {
+    ramos.forEach(ramo => {
+      if (cumplePrerrequisitos(ramo)) {
+        desbloquearRamo(ramo);
+      } else if (!ramo.classList.contains('tachado')) {
+        bloquearRamo(ramo);
+      }
+    });
+  }
 
-li:active {
-  transform: scale(0.97);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
+  actualizarEstados();
 
-/* Ramos tachados */
-li.tachado {
-  background-color: #d6a4ec;
-  text-decoration: line-through;
-  opacity: 0.8;
-}
+  ramos.forEach(ramo => {
+    ramo.addEventListener('click', () => {
+      if (ramo.classList.contains('bloqueado')) {
+        alert('Este ramo está bloqueado. Completa los prerrequisitos primero.');
+        return;
+      }
 
-/* Ramos bloqueados */
-li.bloqueado {
-  background-color: #dddddd;
-  color: #999999;
-  cursor: not-allowed;
-  pointer-events: none;
-  box-shadow: none;
-}
-
-/* Scroll personalizado si quieres (opcional) */
-.malla-container::-webkit-scrollbar {
-  height: 8px;
-}
-
-.malla-container::-webkit-scrollbar-thumb {
-  background-color: #ff94c2;
-  border-radius: 4px;
-}
-
-.malla-container::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
+      ramo.classList.toggle('tachado');
+      actualizarEstados();
+    });
+  });
+});
