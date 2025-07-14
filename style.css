@@ -1,97 +1,76 @@
-/* Elimina márgenes y paddings del navegador */
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-/* Cuerpo de la página */
-body {
-  font-family: Arial, sans-serif;
   overflow-x: auto;
-  overflow-y: hidden; /* 🔒 Elimina scroll vertical */
+  overflow-y: hidden;
   height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
+  font-family: Arial, sans-serif;
+  background-color: #ffeef5; /* rosa pastel claro */
 }
 
-/* Título */
 h1 {
   text-align: center;
-  padding: 10px;
-  background-color: #f1f1f1;
-  flex-shrink: 0;
+  padding: 20px;
+  background-color: #f8bbd0; /* rosa más fuerte para título */
+  color: #6a1b9a;
+  margin: 0;
 }
 
-/* Contenedor horizontal de semestres */
 .malla-container {
   display: flex;
   flex-direction: row;
   gap: 20px;
   padding: 20px;
-  height: calc(100vh - 60px); /* 60px por el h1 */
+  height: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-behavior: smooth;
 }
 
-/* Cada semestre en un bloque vertical */
 .semestre {
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 15px;
+  min-width: 250px;
+  background-color: #fce4ec; /* rosa claro */
+  border-radius: 16px;
   padding: 10px;
-  min-width: 220px;
-  height: 100%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-/* Título del semestre */
 .semestre h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
   text-align: center;
+  color: #880e4f;
 }
 
-/* Lista de ramos */
 .semestre ul {
   list-style: none;
   padding: 0;
-  margin: 0;
-  width: 100%;
-  overflow-y: auto;
 }
 
-/* Cada ramo */
 .semestre li {
-  background-color: #ffe6f0; /* Rosa pastel */
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  background-color: white;
+  margin: 8px 0;
   padding: 8px;
-  margin-bottom: 8px;
-  text-align: center;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: 0.3s;
+  text-align: center;
 }
 
-/* Hover */
 .semestre li:hover {
-  background-color: #ffccdf;
+  background-color: #f8bbd0;
 }
 
-/* Ramos bloqueados */
 .bloqueado {
-  background-color: #eee !important;
+  background-color: #eeeeee !important;
   color: #999;
+  pointer-events: none;
   cursor: not-allowed;
 }
 
-/* Ramos completados */
 .tachado {
+  background-color: #e1bee7 !important; /* lila claro para tachados */
   text-decoration: line-through;
-  color: #b28dff !important; /* Lavanda/morado pastel */
+  color: #4a148c;
 }
