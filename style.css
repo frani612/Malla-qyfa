@@ -1,78 +1,74 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #fff0f6;
-  color: #4a0033;
-  padding: 20px;
-}
-
-h1 {
-  color: #d95ca4;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
+/* Contenedor principal que mantiene los semestres en fila horizontal */
 .malla-container {
   display: flex;
   gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+  overflow-x: auto;
+  padding: 10px;
+  background: #fff0f6;
+  height: 400px; /* altura fija para demo */
+  border: 2px solid #d95ca4;
+  border-radius: 10px;
 }
 
+/* Cada semestre con fondo, borde, y tamaño fijo */
 .semestre {
+  flex: 0 0 220px; /* ancho fijo, no se encoge ni crece */
   background-color: #f9c8dc;
   border: 2px solid #d95ca4;
   border-radius: 10px;
-  padding: 15px;
-  min-width: 200px;
-  max-width: 220px;
-  flex-shrink: 0;
+  padding: 10px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  overflow-y: auto; /* si hay muchos ramos, scroll vertical dentro */
 }
 
+/* Título del semestre */
 .semestre h2 {
-  color: #a64ca6;
-  margin-bottom: 15px;
   text-align: center;
-  font-size: 1.2rem;
+  color: #7a0061;
+  margin-bottom: 10px;
+  font-size: 1.2em;
 }
 
+/* Lista de ramos sin estilo de lista por defecto */
 .semestre ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.semestre ul li {
-  background-color: #f9c8dc;
+/* Cada ramo es un cuadrado */
+.semestre li {
   border: 2px solid #d95ca4;
   border-radius: 8px;
-  padding: 10px 12px;
-  margin-bottom: 10px;
+  background-color: #f9c8dc;
+  padding: 10px;
+  text-align: center;
   cursor: pointer;
   user-select: none;
-  color: #4a0033;
-  transition: background-color 0.3s, color 0.3s;
-  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.semestre ul li.bloqueado {
-  background-color: #e0d6e8;
-  border-color: #b0a0bf;
-  color: #7b6a8a;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.semestre ul li.tachado {
-  background-color: #d8c3e8; /* lavanda pastel */
-  color: #4a2c6a;
+/* Estado tachado (completado) en lavanda pastel */
+.semestre li.tachado {
+  background-color: #c5b3e6; /* lavanda pastel */
+  color: #4b367c;
   text-decoration: line-through;
 }
 
-/* Opcional: hover para activos */
-.semestre ul li:not(.bloqueado):hover {
-  background-color: #eec1e8;
+/* Estado bloqueado en gris */
+.semestre li.bloqueado {
+  background-color: #cccccc;
+  border-color: #999999;
+  color: #666666;
+  cursor: not-allowed;
+  pointer-events: none;
 }
