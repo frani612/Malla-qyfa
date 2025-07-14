@@ -2,21 +2,53 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Malla Curricular - Química y Farmacia</title>
-  
-  <!-- Enlaza los estilos -->
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Malla Curricular - Prueba</title>
+  <style>
+    .ramo { padding: 10px; margin: 5px; border-radius: 5px; }
+    .aprobado { background-color: rgba(255, 182, 193, 0.5); }
+    .desbloqueado { background-color: #aeeeee; }
+  </style>
 </head>
 <body>
-
-  <!-- Título -->
-  <h1>Malla Interactiva - Química y Farmacia</h1>
-
-  <!-- Aquí se insertan los ramos dinámicamente con JavaScript -->
+  <h1>Malla Interactiva - Prueba</h1>
   <div id="malla"></div>
-
-  <!-- Enlaza la lógica de desbloqueo/aprobación -->
-  <script src="script.js"></script>
+  <script>
+    const ramos = [
+      { id: "matematica", nombre: "Matemática", semestre: 1 },
+      { id: "estadistica", nombre: "Estadística", semestre: 2, prereq: ["matematica"] }
+    ];
+    const estado = {};
+    function render() {
+      const cont = document.getElementById("malla");
+      cont.innerHTML = "";
+      for (let s = 1; s <= 2; s++) {
+        const sem = document.createElement("div");
+        sem.innerHTML = `<h2>Semestre ${s}</h2>`;
+        ramos.filter(r => r.semestre === s).forEach(ramo => {
+          const aprobado = estado[ramo.id];
+          const prereq = ramo.prereq || [];
+          const desbloqueado = prereq.length === 0 || prereq.every(p => estado[p]);
+          const div = document.createElement("div");
+          div.className = "ramo";
+          if (aprobado) div.classList.add("aprobado");
+          else if (desbloqueado) div.classList.add("desbloqueado");
+          div.textContent = ramo.nombre;
+          if (!aprobado && desbloqueado) {
+            const btn = document.createElement("button");
+            btn.textContent = "Aprobar";
+            btn.onclick = () => {
+              estado[ramo.id] = true;
+              render();
+            };
+            div.appendChild(btn);
+          }
+          sem.appendChild(div);
+        });
+        cont.appendChild(sem);
+      }
+    }
+    render();
+  </script>
 </body>
 </html>
