@@ -1,28 +1,41 @@
-body {
+/* Elimina márgenes y paddings del navegador */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+/* Cuerpo de la página */
+body {
   font-family: Arial, sans-serif;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: hidden; /* 🔒 Elimina scroll vertical */
   height: 100vh;
-  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Título */
 h1 {
   text-align: center;
-  margin: 20px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  flex-shrink: 0;
 }
 
+/* Contenedor horizontal de semestres */
 .malla-container {
   display: flex;
   flex-direction: row;
   gap: 20px;
   padding: 20px;
-  height: calc(100vh - 100px);
-  box-sizing: border-box;
+  height: calc(100vh - 60px); /* 60px por el h1 */
   overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
 }
 
+/* Cada semestre en un bloque vertical */
 .semestre {
   background-color: #fff;
   border: 2px solid #ddd;
@@ -37,19 +50,23 @@ h1 {
   align-items: center;
 }
 
+/* Título del semestre */
 .semestre h2 {
   font-size: 18px;
   margin-bottom: 10px;
   text-align: center;
 }
 
+/* Lista de ramos */
 .semestre ul {
   list-style: none;
   padding: 0;
   margin: 0;
   width: 100%;
+  overflow-y: auto;
 }
 
+/* Cada ramo */
 .semestre li {
   background-color: #ffe6f0; /* Rosa pastel */
   border: 1px solid #ddd;
@@ -61,18 +78,20 @@ h1 {
   transition: background-color 0.3s;
 }
 
+/* Hover */
 .semestre li:hover {
   background-color: #ffccdf;
 }
 
+/* Ramos bloqueados */
 .bloqueado {
   background-color: #eee !important;
   color: #999;
   cursor: not-allowed;
 }
 
+/* Ramos completados */
 .tachado {
   text-decoration: line-through;
-  color: #b28dff !important; /* Lavanda o morado pastel */
+  color: #b28dff !important; /* Lavanda/morado pastel */
 }
-
