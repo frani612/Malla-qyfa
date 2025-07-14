@@ -1,100 +1,113 @@
-/* Fondo general rosado claro */
+/* Estilo general del body */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #ffe6ee; /* rosa pastel claro */
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffe6f0; /* Fondo rosado claro */
   overflow-x: auto;
   overflow-y: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Título principal */
 h1 {
   text-align: center;
-  padding: 20px;
-  color: #b30059;
-  background-color: #ffd9e6;
-  margin: 0;
-  font-size: 2em;
+  margin: 20px 0;
+  color: #aa336a;
 }
 
-/* Contenedor principal con scroll horizontal */
+/* Contenedor principal en scroll horizontal */
 .malla-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 20px;
+  overflow-x: auto;
+  height: 100%;
   padding: 20px;
-  width: max-content;
+  gap: 20px;
+  box-sizing: border-box;
 }
 
-/* Cada semestre dentro de un cuadro */
+/* Cada semestre */
 .semestre {
-  background-color: #fdd0e9;
-  border-radius: 16px;
-  padding: 15px;
   min-width: 250px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #ffe0eb; /* Fondo del cuadro de semestre */
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-/* Título del semestre */
 .semestre h2 {
   text-align: center;
-  color: #99004d;
+  color: #b30059;
   font-size: 1.2em;
-  margin-bottom: 10px;
 }
 
-/* Lista de ramos */
 .semestre ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* Ramos desbloqueados */
+/* Estilo de los ramos como botones */
 li {
-  padding: 8px 10px;
-  margin: 5px 0;
-  border-radius: 8px;
-  background-color: #fca3b7; /* rosado más fuerte para ramos desbloqueados */
-  color: #333;
+  background-color: #ffb6d5; /* Rosado fuerte desbloqueado */
+  border: none;
+  padding: 15px;
+  margin: 0;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease-in-out;
+  user-select: none;
 }
 
-/* Ramos al pasar el mouse */
 li:hover {
-  transform: scale(1.02);
-  background-color: #f880a2;
+  background-color: #ff94c2;
+}
+
+li:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Ramos tachados */
+li.tachado {
+  background-color: #d6a4ec;
+  text-decoration: line-through;
+  opacity: 0.8;
 }
 
 /* Ramos bloqueados */
-.bloqueado {
+li.bloqueado {
   background-color: #dddddd;
   color: #999999;
   cursor: not-allowed;
   pointer-events: none;
-  opacity: 0.6;
+  box-shadow: none;
 }
 
-/* Ramos tachados */
-.tachado {
-  text-decoration: line-through;
-  background-color: #e7b7f1; /* lavanda pastel */
-  color: #777777;
-}
-
-/* Scroll horizontal limpio */
-body::-webkit-scrollbar {
+/* Scroll personalizado si quieres (opcional) */
+.malla-container::-webkit-scrollbar {
   height: 8px;
 }
 
-body::-webkit-scrollbar-thumb {
-  background: #ffa6c9;
+.malla-container::-webkit-scrollbar-thumb {
+  background-color: #ff94c2;
   border-radius: 4px;
 }
 
-body::-webkit-scrollbar-track {
-  background: transparent;
+.malla-container::-webkit-scrollbar-track {
+  background-color: transparent;
 }
+
