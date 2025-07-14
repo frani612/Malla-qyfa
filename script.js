@@ -1,112 +1,64 @@
-/* Estilo general del body */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #ffe6f0; /* Fondo rosado claro */
-  overflow-x: auto;
-  overflow-y: hidden;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+window.addEventListener('DOMContentLoaded', () => {
+  const ramos = Array.from(document.querySelectorAll('li'));
 
-/* Título principal */
-h1 {
-  text-align: center;
-  margin: 20px 0;
-  color: #aa336a;
-}
+  function cumplePrerrequisitos(ramo) {
+    const id = ramo.dataset.id;
+    const prerrequisitos = ramos.filter(r => {
+      if (!r.dataset.abre) return false;
+      if (r.dataset.abre.trim() === '') return false;
 
-/* Contenedor principal en scroll horizontal */
-.malla-container {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  height: 100%;
-  padding: 20px;
-  gap: 20px;
-  box-sizing: border-box;
-}
+      // Uso split con regex para evitar elementos vacíos por espacios extras
+      const abreIds = r.dataset.abre.trim().split(/\s+/);
 
-/* Cada semestre */
-.semestre {
-  min-width: 250px;
-  background-color: #ffe0eb; /* Fondo del cuadro de semestre */
-  border-radius: 15px;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
+      return abreIds.includes(id);
+    });
 
-.semestre h2 {
-  text-align: center;
-  color: #b30059;
-  font-size: 1.2em;
-}
+    // console.log(`Ramo ${id} tiene prerrequisitos:`, prerrequisitos.map(r => r.dataset.id));
 
-.semestre ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+    if (prerrequisitos.length === 0) return true;
 
-/* Estilo de los ramos como botones */
-li {
-  background-color: #ffb6d5; /* Rosado fuerte desbloqueado */
-  border: none;
-  padding: 15px;
-  margin: 0;
-  border-radius: 10px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.15s ease-in-out;
-  user-select: none;
-}
+    const todosTachados = prerrequisitos.every(r => r.classList.contains('tachado'));
 
-li:hover {
-  background-color: #ff94c2;
-}
+    // console.log(`¿Todos prerrequisitos de ${id} tachados?`, todosTachados);
 
-li:active {
-  transform: scale(0.97);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
+    return todosTachados;
+  }
 
-/* Ramos tachados */
-li.tachado {
-  background-color: #d6a4ec;
-  text-decoration: line-through;
-  opacity: 0.8;
-}
+  function bloquearRamo(ramo) {
+    ramo.classList.add('bloqueado');
+    ramo.classList.remove('tachado');
+    ramo.style.pointerEvents = 'none';
+    ramo.style.cursor = 'not-allowed';
+  }
 
-/* Ramos bloqueados */
-li.bloqueado {
-  background-color: #dddddd;
-  color: #999999;
-  cursor: not-allowed;
-  pointer-events: none;
-  box-shadow: none;
-}
+  function desbloquearRamo(ramo) {
+    ramo.classList.remove('bloqueado');
+    ramo.style.pointerEvents = 'auto';
+    ramo.style.cursor = 'pointer';
+  }
 
-/* Scroll personalizado si quieres (opcional) */
-.malla-container::-webkit-scrollbar {
-  height: 8px;
-}
+  function actualizarEstados() {
+    ramos.forEach(ramo => {
+      if (cumplePrerrequisitos(ramo)) {
+        desbloquearRamo(ramo);
+      } else {
+        if (!ramo.classList.contains('tachado')) {
+          bloquearRamo(ramo);
+        }
+      }
+    });
+  }
 
-.malla-container::-webkit-scrollbar-thumb {
-  background-color: #ff94c2;
-  border-radius: 4px;
-}
+  actualizarEstados();
 
-.malla-container::-webkit-scrollbar-track {
-  background-color: transparent;
-}
+  ramos.forEach(ramo => {
+    ramo.addEventListener('click', () => {
+      if (ramo.classList.contains('bloqueado')) {
+        alert('Este ramo está bloqueado. Completa los prerrequisitos primero.');
+        return;
+      }
+      ramo.classList.toggle('tachado');
+      actualizarEstados();
+    });
+  });
+});
