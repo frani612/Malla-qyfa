@@ -1,8 +1,8 @@
 body {
   font-family: Arial, sans-serif;
-  padding: 20px;
-  background: #fff0f6;
+  background-color: #fff0f6;
   color: #4a0033;
+  padding: 20px;
 }
 
 h1 {
@@ -11,54 +11,68 @@ h1 {
   margin-bottom: 30px;
 }
 
-h2 {
-  color: #a64d7e;
-  margin-top: 40px;
-  margin-bottom: 15px;
+.malla-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* Contenedor de la lista: usamos grid para que cada ramo sea una tarjeta */
-ul {
-  list-style-type: none;
-  padding-left: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
-}
-
-/* Cada ramo como tarjeta cuadrada */
-li {
+.semestre {
+  background-color: #f9c8dc;
   border: 2px solid #d95ca4;
   border-radius: 10px;
-  background-color: #f9c8dc; /* lavanda claro */
-  padding: 20px;
+  padding: 15px;
+  min-width: 200px;
+  max-width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.semestre h2 {
+  color: #a64ca6;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.semestre ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.semestre ul li {
+  background-color: #f9c8dc;
+  border: 2px solid #d95ca4;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
   cursor: pointer;
   user-select: none;
   color: #4a0033;
-  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s;
   text-align: center;
-  min-height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease;
 }
 
-li:hover:not(.bloqueado) {
-  background-color: #e199c2; /* lavanda más fuerte al pasar el mouse */
-  transform: scale(1.05);
-}
-
-li.tachado {
-  text-decoration: line-through;
-  color: #6e0f4e; /* rosado oscuro */
-  background-color: #f2a8ce; /* rosa suave */
-}
-
-li.bloqueado {
-  background-color: rgba(169, 169, 169, 0.4); /* gris claro transparente */
-  border-color: rgba(122, 122, 122, 0.4);
-  color: rgba(122, 122, 122, 0.6);
+.semestre ul li.bloqueado {
+  background-color: #e0d6e8;
+  border-color: #b0a0bf;
+  color: #7b6a8a;
   cursor: not-allowed;
-  pointer-events: none; /* desactiva interacción */
+  pointer-events: none;
+}
+
+.semestre ul li.tachado {
+  background-color: #d8c3e8; /* lavanda pastel */
+  color: #4a2c6a;
+  text-decoration: line-through;
+}
+
+/* Opcional: hover para activos */
+.semestre ul li:not(.bloqueado):hover {
+  background-color: #eec1e8;
 }
