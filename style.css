@@ -1,76 +1,100 @@
+/* Fondo general rosado claro */
 body {
+  font-family: Arial, sans-serif;
+  background-color: #ffe6ee; /* rosa pastel claro */
   margin: 0;
   padding: 0;
   overflow-x: auto;
   overflow-y: hidden;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  font-family: Arial, sans-serif;
-  background-color: #ffeef5; /* rosa pastel claro */
 }
 
+/* Título principal */
 h1 {
   text-align: center;
   padding: 20px;
-  background-color: #f8bbd0; /* rosa más fuerte para título */
-  color: #6a1b9a;
+  color: #b30059;
+  background-color: #ffd9e6;
   margin: 0;
+  font-size: 2em;
 }
 
+/* Contenedor principal con scroll horizontal */
 .malla-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   gap: 20px;
   padding: 20px;
-  height: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  width: max-content;
 }
 
+/* Cada semestre dentro de un cuadro */
 .semestre {
-  min-width: 250px;
-  background-color: #fce4ec; /* rosa claro */
+  background-color: #fdd0e9;
   border-radius: 16px;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 15px;
+  min-width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
 }
 
+/* Título del semestre */
 .semestre h2 {
   text-align: center;
-  color: #880e4f;
+  color: #99004d;
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }
 
+/* Lista de ramos */
 .semestre ul {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
 }
 
-.semestre li {
-  background-color: white;
-  margin: 8px 0;
-  padding: 8px;
-  border-radius: 10px;
+/* Ramos desbloqueados */
+li {
+  padding: 8px 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  background-color: #fca3b7; /* rosado más fuerte para ramos desbloqueados */
+  color: #333;
   cursor: pointer;
-  transition: 0.3s;
-  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-.semestre li:hover {
-  background-color: #f8bbd0;
+/* Ramos al pasar el mouse */
+li:hover {
+  transform: scale(1.02);
+  background-color: #f880a2;
 }
 
+/* Ramos bloqueados */
 .bloqueado {
-  background-color: #eeeeee !important;
-  color: #999;
-  pointer-events: none;
+  background-color: #dddddd;
+  color: #999999;
   cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.6;
 }
 
+/* Ramos tachados */
 .tachado {
-  background-color: #e1bee7 !important; /* lila claro para tachados */
   text-decoration: line-through;
-  color: #4a148c;
+  background-color: #e7b7f1; /* lavanda pastel */
+  color: #777777;
+}
+
+/* Scroll horizontal limpio */
+body::-webkit-scrollbar {
+  height: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #ffa6c9;
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
 }
