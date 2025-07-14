@@ -3,25 +3,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function cumplePrerrequisitos(ramo) {
     const id = ramo.dataset.id;
+
+    // Encuentra todos los ramos que deben estar tachados para desbloquear este
     const prerrequisitos = ramos.filter(r => {
       if (!r.dataset.abre) return false;
-      if (r.dataset.abre.trim() === '') return false;
 
-      // Uso split con regex para evitar elementos vacíos por espacios extras
       const abreIds = r.dataset.abre.trim().split(/\s+/);
-
       return abreIds.includes(id);
     });
 
-    // console.log(`Ramo ${id} tiene prerrequisitos:`, prerrequisitos.map(r => r.dataset.id));
-
+    // Si nadie lo desbloquea, está disponible desde el principio
     if (prerrequisitos.length === 0) return true;
 
-    const todosTachados = prerrequisitos.every(r => r.classList.contains('tachado'));
-
-    // console.log(`¿Todos prerrequisitos de ${id} tachados?`, todosTachados);
-
-    return todosTachados;
+    // Se desbloquea solo si TODOS los ramos que lo abren están tachados
+    return prerrequisitos.every(r => r.classList.contains('tachado'));
   }
 
   function bloquearRamo(ramo) {
@@ -41,10 +36,8 @@ window.addEventListener('DOMContentLoaded', () => {
     ramos.forEach(ramo => {
       if (cumplePrerrequisitos(ramo)) {
         desbloquearRamo(ramo);
-      } else {
-        if (!ramo.classList.contains('tachado')) {
-          bloquearRamo(ramo);
-        }
+      } else if (!ramo.classList.contains('tachado')) {
+        bloquearRamo(ramo);
       }
     });
   }
@@ -57,6 +50,7 @@ window.addEventListener('DOMContentLoaded', () => {
         alert('Este ramo está bloqueado. Completa los prerrequisitos primero.');
         return;
       }
+
       ramo.classList.toggle('tachado');
       actualizarEstados();
     });
