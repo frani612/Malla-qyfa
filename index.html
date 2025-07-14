@@ -52,7 +52,6 @@
 
 <h1>Malla Curricular Interactiva - Farmacia</h1>
 
-<!-- Primer semestre -->
 <h2>Primer Semestre</h2>
 <ul>
   <li data-id="1">Matemática</li>
@@ -63,7 +62,6 @@
   <li data-id="6">Biología celular</li>
 </ul>
 
-<!-- Segundo semestre -->
 <h2>Segundo Semestre</h2>
 <ul>
   <li data-id="7" class="bloqueado">Anatomía humana</li>
@@ -75,7 +73,6 @@
   <li data-id="13" class="bloqueado">Introducción a la física</li>
 </ul>
 
-<!-- Tercer semestre -->
 <h2>Tercer Semestre</h2>
 <ul>
   <li data-id="14" class="bloqueado">Cálculo</li>
@@ -88,7 +85,6 @@
   <li data-id="21" class="bloqueado">Formación integral I</li>
 </ul>
 
-<!-- Cuarto semestre -->
 <h2>Cuarto Semestre</h2>
 <ul>
   <li data-id="22" class="bloqueado">Fisiopatología</li>
@@ -101,7 +97,6 @@
   <li data-id="29" class="bloqueado">Formación integral II</li>
 </ul>
 
-<!-- Quinto semestre -->
 <h2>Quinto Semestre</h2>
 <ul>
   <li data-id="30" class="bloqueado">Farmacología I</li>
@@ -113,7 +108,6 @@
   <li data-id="36" class="bloqueado">Formación integral III</li>
 </ul>
 
-<!-- Sexto semestre -->
 <h2>Sexto Semestre</h2>
 <ul>
   <li data-id="37" class="bloqueado">Farmacología II</li>
@@ -124,7 +118,6 @@
   <li data-id="42" class="bloqueado">Práctica atención primaria</li>
 </ul>
 
-<!-- Séptimo semestre -->
 <h2>Séptimo Semestre</h2>
 <ul>
   <li data-id="43" class="bloqueado">Farmacocinética clínica</li>
@@ -134,7 +127,6 @@
   <li data-id="47" class="bloqueado">Farmacia clínica I</li>
 </ul>
 
-<!-- Octavo semestre -->
 <h2>Octavo Semestre</h2>
 <ul>
   <li data-id="48" class="bloqueado">Farmacia asistencial</li>
@@ -145,7 +137,6 @@
   <li data-id="53" class="bloqueado">Práctica farmacia comunitaria</li>
 </ul>
 
-<!-- Noveno semestre -->
 <h2>Noveno Semestre</h2>
 <ul>
   <li data-id="54" class="bloqueado">Internado en farmacia asistencial</li>
@@ -155,7 +146,6 @@
   <li data-id="58" class="bloqueado">Seminario de título I</li>
 </ul>
 
-<!-- Décimo semestre -->
 <h2>Décimo Semestre</h2>
 <ul>
   <li data-id="59" class="bloqueado">Internado farmacia clínica o industria farmacéutica o industria cosmética</li>
@@ -163,65 +153,63 @@
 </ul>
 
 <script>
-  // Mapeo: ID del ramo => array con los IDs que desbloquea
   const desbloqueos = {
-    1: [12,14,13],            // Matemática abre Estadística(12), Cálculo(14), Introducción a la física(13)
-    4: [8,9,10,11],           // Química general abre Química inorgánica(8), Lab Q. inorgánica(9), Química orgánica(10), Lab química orgánica(11)
-    5: [8,9,10,11],           // Lab química general igual abre esos
-    6: [15,16,17,18,19],      // Biología celular abre Fisiología humana(15), Farmacognosia(16), Microbiología(17), Bioquímica general(18), Lab bioquímica general(19)
+    1: [12,14,13],
+    4: [8,9,10,11],
+    5: [8,9,10,11],
+    6: [15,16,17,18,19],
 
-    12: [20],                 // Estadística abre Epidemiología (20)
-    14: [23,24],              // Cálculo abre Fisicoquímica(23) y Lab fisicoquímica(24)
-    15: [22],                 // Fisiología humana abre Fisiopatología(22)
-    16: [27],                 // Farmacognosia y fitoterapia abre Análisis de la evidencia científica I (simplificado para mostrar)
-    17: [28],                 // Microbiología general abre farmacología I(28) (ajustado)
-    18: [31,32],              // Bioquímica general abre bioquímica clínica (31,32)
-    19: [31,32],              // Lab bioquímica general abre bioquímica clínica
+    12: [20],
+    14: [23,24],
+    15: [22],
+    16: [27],
+    17: [28],
+    18: [31,32],
+    19: [31,32],
 
-    22: [30,35],              // Fisiopatología abre farmacología I(30), análisis de la evidencia científica I(35)
-    23: [33],                 // Fisicoquímica abre tecnología farmacéutica I(33)
-    24: [33],                 // Laboratorio fisicoquímica abre tecnología farmacéutica I(33)
-    25: [33],                 // Análisis químico instrumental abre tecnología farmacéutica I(33)
-    26: [33],                 // Lab análisis químico instrumental abre tecnología farmacéutica I(33)
-    27: [35,42],              // Farmacognosia abre análisis de la evidencia científica I(35), práctica atención primaria(42)
-    28: [30],                 // Microbiología general abre farmacología I(30)
+    22: [30,35],
+    23: [33],
+    24: [33],
+    25: [33],
+    26: [33],
+    27: [35,42],
+    28: [30],
 
-    30: [37],                 // Farmacología I abre farmacología II(37)
-    31: [41],                 // Bioquímica clínica abre bioquímica clínica II(41)
-    32: [41],                 // Lab bioquímica clínica abre bioquímica clínica II(41)
-    33: [38],                 // Tecnología farmacéutica abre tecnología farmacéutica II(38)
-    34: [39],                 // Fármaco química abre fármaco química II(39)
-    35: [36],                 // Análisis de la evidencia científica I abre formación integral III(36)
+    30: [37],
+    31: [41],
+    32: [41],
+    33: [38],
+    34: [39],
+    35: [36],
 
-    37: [42,43,44,45,46,47], // Farmacología II abre prácticas y cursos (42 a 47)
-    38: [45],                 // Tecnología farmacéutica II abre tecnología cosmética (45)
-    39: [53],                 // Fármaco química II abre práctica farmacia comunitaria (53)
-    40: [42,47],              // Análisis evidencia científica II abre práctica atención primaria(42) y farmacia asistencial(47)
-    41: [43,44,46,47],        // Bioquímica clínica II abre varios cursos (43,44,46,47)
-    42: [54],                 // Práctica atención primaria abre administración y gestión farmacéutica (54)
+    37: [42,43,44,45,46,47],
+    38: [45],
+    39: [53],
+    40: [42,47],
+    41: [43,44,46,47],
+    42: [54],
 
-    43: [49],                 // Farmacocinética clínica abre Bioequivalencia (49)
-    44: [52],                 // Nutrición clínica abre Farmacia clínica II (52)
-    45: [49,50],              // Tecnología cosmética abre Bioequivalencia (49), control calidad procesos (50)
-    46: [53,56],              // Toxicología abre práctica farmacia comunitaria (53), farmacovigilancia (56)
-    47: [52],                 // Farmacia clínica I abre Farmacia clínica II (52)
+    43: [49],
+    44: [52],
+    45: [49,50],
+    46: [53,56],
+    47: [52],
 
-    48: [54,58],              // Farmacia asistencial abre internado y seminario I (54,58)
-    49: [54,58],              // Bioequivalencia abre internado y seminario I
-    50: [54,58,58],           // Control calidad abre internado y seminario I
-    51: [53,54,58],           // Administración y gestión abre práctica, internado y seminario I
-    52: [56,54,58],           // Farmacia clínica II abre farmacovigilancia, internado y seminario I
-    53: [57,54,58],           // Práctica farmacia comunitaria abre legislación, internado y seminario I
+    48: [54,58],
+    49: [54,58],
+    50: [54,58,58],
+    51: [53,54,58],
+    52: [56,54,58],
+    53: [57,54,58],
 
-    54: [59,60],              // Internado en farmacia asistencial abre internado clínica, industria, seminario II
-    55: [59,60],              // Aseguramiento y gestión calidad abre internado y seminario II
-    56: [59,60],              // Farmacovigilancia abre internado y seminario II
-    57: [59,60],              // Legislación farmacéutica abre internado y seminario II
+    54: [59,60],
+    55: [59,60],
+    56: [59,60],
+    57: [59,60],
   };
 
   const ramos = document.querySelectorAll('li[data-id]');
 
-  // Función para bloquear ramo y sus dependientes (cascada)
   function bloquearCascada(ramo) {
     if (!ramo.classList.contains('bloqueado')) {
       ramo.classList.add('bloqueado');
@@ -241,20 +229,16 @@
         alert('Debes completar los prerrequisitos primero.');
         return;
       }
-      // Alternar tachado
       ramo.classList.toggle('tachado');
-
       const id = parseInt(ramo.dataset.id);
       const desbloqueados = desbloqueos[id] || [];
 
       if (ramo.classList.contains('tachado')) {
-        // Al tachar desbloqueamos dependientes
         desbloqueados.forEach(idDesbloqueado => {
           const r = document.querySelector(`li[data-id="${idDesbloqueado}"]`);
           r.classList.remove('bloqueado');
         });
       } else {
-        // Al desmarcar bloqueamos dependientes en cascada
         desbloqueados.forEach(idDesbloqueado => {
           const r = document.querySelector(`li[data-id="${idDesbloqueado}"]`);
           bloquearCascada(r);
