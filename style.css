@@ -70,6 +70,7 @@ li {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.15s ease-in-out;
   user-select: none;
+  color: #333;
 }
 
 li:hover {
@@ -84,8 +85,10 @@ li:active {
 /* Ramos tachados */
 li.tachado {
   background-color: #d6a4ec;
+  color: #333;
   text-decoration: line-through;
-  opacity: 0.8;
+  opacity: 1;
+  transition: all 0.3s ease;
 }
 
 /* Ramos bloqueados */
@@ -95,9 +98,11 @@ li.bloqueado {
   cursor: not-allowed;
   pointer-events: none;
   box-shadow: none;
+  text-decoration: none;
+  opacity: 1;
 }
 
-/* Scroll personalizado si quieres (opcional) */
+/* Scroll personalizado (opcional) */
 .malla-container::-webkit-scrollbar {
   height: 8px;
 }
@@ -110,3 +115,4 @@ li.bloqueado {
 .malla-container::-webkit-scrollbar-track {
   background-color: transparent;
 }
+
