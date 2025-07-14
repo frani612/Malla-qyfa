@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
-<head><link rel="stylesheet" href="style.css" />
+<head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Malla Curricular Interactiva - Farmacia</title>
-<link rel="stylesheet" href="css/style.css" />
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #fff0f6;
+    color: #4a0033;
+  }
+
+  h1 {
+    color: #d95ca4;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  li {
+    border: 2px solid #d95ca4;
+    border-radius: 8px;
+    background-color: #f9c8dc;
+    padding: 12px 15px;
+    margin: 8px 0;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  li.tachado {
+    text-decoration: line-through;
+    color: #6e0f4e;
+    background-color: #f2a8ce;
+  }
+
+  li.bloqueado {
+    background-color: rgba(249, 200, 220, 0.4);
+    border-color: rgba(217, 92, 164, 0.4);
+    color: rgba(122, 0, 79, 0.4);
+    cursor: not-allowed;
+  }
+</style>
 </head>
 <body>
 
@@ -110,7 +150,17 @@
   <li data-id="60" class="bloqueado">Seminario de título II</li>
 </ul>
 
-<script src="script.js"></script>
+<script>
+  document.querySelectorAll('li').forEach(ramo => {
+    ramo.addEventListener('click', () => {
+      if (ramo.classList.contains('bloqueado')) {
+        alert('Este ramo está bloqueado. Completa los prerrequisitos primero.');
+        return;
+      }
+      ramo.classList.toggle('tachado');
+    });
+  });
+</script>
 
 </body>
 </html>
