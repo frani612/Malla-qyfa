@@ -14,22 +14,56 @@
 
   h1 {
     color: #d95ca4;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .malla-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .semestre {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 180px;
+  }
+
+  .semestre h2 {
+    color: #a64d7e;
+    margin-bottom: 15px;
+    text-align: center;
   }
 
   ul {
-    list-style-type: none;
     padding-left: 0;
+    margin: 0;
   }
 
   li {
+    list-style: none;
     border: 2px solid #d95ca4;
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: #f9c8dc;
-    padding: 12px 15px;
-    margin: 8px 0;
+    padding: 15px;
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #4a0033;
+    font-weight: 600;
+    text-align: center;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease;
+  }
+
+  li:hover:not(.bloqueado) {
+    background-color: #e199c2;
+    transform: scale(1.05);
   }
 
   li.tachado {
@@ -39,10 +73,11 @@
   }
 
   li.bloqueado {
-    background-color: rgba(249, 200, 220, 0.4);
-    border-color: rgba(217, 92, 164, 0.4);
-    color: rgba(122, 0, 79, 0.4);
+    background-color: rgba(169, 169, 169, 0.4);
+    border-color: rgba(122, 122, 122, 0.4);
+    color: rgba(122, 122, 122, 0.6);
     cursor: not-allowed;
+    pointer-events: none;
   }
 </style>
 </head>
@@ -50,105 +85,129 @@
 
 <h1>Malla Curricular Interactiva - Farmacia</h1>
 
-<h2>Primer Semestre</h2>
-<ul>
-  <li data-id="1">Matemática</li>
-  <li data-id="2">Introducción a las ciencias farmacéuticas</li>
-  <li data-id="3">Psicología general</li>
-  <li data-id="4">Química general</li>
-  <li data-id="5">Laboratorio de química general</li>
-  <li data-id="6">Biología celular</li>
-</ul>
+<div class="malla-container">
 
-<h2>Segundo Semestre</h2>
-<ul>
-  <li data-id="7" class="bloqueado">Anatomía humana</li>
-  <li data-id="8" class="bloqueado">Química inorgánica</li>
-  <li data-id="9" class="bloqueado">Laboratorio química inorgánica</li>
-  <li data-id="10" class="bloqueado">Química orgánica</li>
-  <li data-id="11" class="bloqueado">Laboratorio química orgánica</li>
-  <li data-id="12" class="bloqueado">Estadística</li>
-  <li data-id="13" class="bloqueado">Introducción a la física</li>
-</ul>
+  <div class="semestre">
+    <h2>Primer Semestre</h2>
+    <ul>
+      <li data-id="1">Matemática</li>
+      <li data-id="2">Introducción a las ciencias farmacéuticas</li>
+      <li data-id="3">Psicología general</li>
+      <li data-id="4">Química general</li>
+      <li data-id="5">Laboratorio de química general</li>
+      <li data-id="6">Biología celular</li>
+    </ul>
+  </div>
 
-<h2>Tercer Semestre</h2>
-<ul>
-  <li data-id="14" class="bloqueado">Cálculo</li>
-  <li data-id="15" class="bloqueado">Fisiología humana</li>
-  <li data-id="16" class="bloqueado">Química orgánica avanzada</li>
-  <li data-id="17" class="bloqueado">Laboratorio química orgánica avanzada</li>
-  <li data-id="18" class="bloqueado">Química analítica cuali-cuantitativa</li>
-  <li data-id="19" class="bloqueado">Laboratorio química cuali-cuantitativa</li>
-  <li data-id="20" class="bloqueado">Epidemiología y salud pública</li>
-  <li data-id="21" class="bloqueado">Formación integral I</li>
-</ul>
+  <div class="semestre">
+    <h2>Segundo Semestre</h2>
+    <ul>
+      <li data-id="7" class="bloqueado">Anatomía humana</li>
+      <li data-id="8" class="bloqueado">Química inorgánica</li>
+      <li data-id="9" class="bloqueado">Laboratorio química inorgánica</li>
+      <li data-id="10" class="bloqueado">Química orgánica</li>
+      <li data-id="11" class="bloqueado">Laboratorio química orgánica</li>
+      <li data-id="12" class="bloqueado">Estadística</li>
+      <li data-id="13" class="bloqueado">Introducción a la física</li>
+    </ul>
+  </div>
 
-<h2>Cuarto Semestre</h2>
-<ul>
-  <li data-id="22" class="bloqueado">Fisiopatología</li>
-  <li data-id="23" class="bloqueado">Fisicoquímica</li>
-  <li data-id="24" class="bloqueado">Laboratorio fisicoquímica</li>
-  <li data-id="25" class="bloqueado">Análisis químico instrumental</li>
-  <li data-id="26" class="bloqueado">Laboratorio análisis químico instrumental</li>
-  <li data-id="27" class="bloqueado">Farmacognosia y fitoterapia</li>
-  <li data-id="28" class="bloqueado">Microbiología general</li>
-  <li data-id="29" class="bloqueado">Formación integral II</li>
-</ul>
+  <div class="semestre">
+    <h2>Tercer Semestre</h2>
+    <ul>
+      <li data-id="14" class="bloqueado">Cálculo</li>
+      <li data-id="15" class="bloqueado">Fisiología humana</li>
+      <li data-id="16" class="bloqueado">Química orgánica avanzada</li>
+      <li data-id="17" class="bloqueado">Laboratorio química orgánica avanzada</li>
+      <li data-id="18" class="bloqueado">Química analítica cuali-cuantitativa</li>
+      <li data-id="19" class="bloqueado">Laboratorio química cuali-cuantitativa</li>
+      <li data-id="20" class="bloqueado">Epidemiología y salud pública</li>
+      <li data-id="21" class="bloqueado">Formación integral I</li>
+    </ul>
+  </div>
 
-<h2>Quinto Semestre</h2>
-<ul>
-  <li data-id="30" class="bloqueado">Farmacología I</li>
-  <li data-id="31" class="bloqueado">Bioquímica general</li>
-  <li data-id="32" class="bloqueado">Laboratorio de bioquímica general</li>
-  <li data-id="33" class="bloqueado">Tecnología farmacéutica</li>
-  <li data-id="34" class="bloqueado">Fármaco química</li>
-  <li data-id="35" class="bloqueado">Análisis de la evidencia científica I</li>
-  <li data-id="36" class="bloqueado">Formación integral III</li>
-</ul>
+  <div class="semestre">
+    <h2>Cuarto Semestre</h2>
+    <ul>
+      <li data-id="22" class="bloqueado">Fisiopatología</li>
+      <li data-id="23" class="bloqueado">Fisicoquímica</li>
+      <li data-id="24" class="bloqueado">Laboratorio fisicoquímica</li>
+      <li data-id="25" class="bloqueado">Análisis químico instrumental</li>
+      <li data-id="26" class="bloqueado">Laboratorio análisis químico instrumental</li>
+      <li data-id="27" class="bloqueado">Farmacognosia y fitoterapia</li>
+      <li data-id="28" class="bloqueado">Microbiología general</li>
+      <li data-id="29" class="bloqueado">Formación integral II</li>
+    </ul>
+  </div>
 
-<h2>Sexto Semestre</h2>
-<ul>
-  <li data-id="37" class="bloqueado">Farmacología II</li>
-  <li data-id="38" class="bloqueado">Tecnología farmacéutica II</li>
-  <li data-id="39" class="bloqueado">Fármaco química II</li>
-  <li data-id="40" class="bloqueado">Análisis de la evidencia científica II</li>
-  <li data-id="41" class="bloqueado">Bioquímica clínica II</li>
-  <li data-id="42" class="bloqueado">Práctica atención primaria</li>
-</ul>
+  <div class="semestre">
+    <h2>Quinto Semestre</h2>
+    <ul>
+      <li data-id="30" class="bloqueado">Farmacología I</li>
+      <li data-id="31" class="bloqueado">Bioquímica general</li>
+      <li data-id="32" class="bloqueado">Laboratorio de bioquímica general</li>
+      <li data-id="33" class="bloqueado">Tecnología farmacéutica</li>
+      <li data-id="34" class="bloqueado">Fármaco química</li>
+      <li data-id="35" class="bloqueado">Análisis de la evidencia científica I</li>
+      <li data-id="36" class="bloqueado">Formación integral III</li>
+    </ul>
+  </div>
 
-<h2>Séptimo Semestre</h2>
-<ul>
-  <li data-id="43" class="bloqueado">Farmacocinética clínica</li>
-  <li data-id="44" class="bloqueado">Nutrición clínica</li>
-  <li data-id="45" class="bloqueado">Tecnología cosmética</li>
-  <li data-id="46" class="bloqueado">Toxicología</li>
-  <li data-id="47" class="bloqueado">Farmacia clínica I</li>
-</ul>
+  <div class="semestre">
+    <h2>Sexto Semestre</h2>
+    <ul>
+      <li data-id="37" class="bloqueado">Farmacología II</li>
+      <li data-id="38" class="bloqueado">Tecnología farmacéutica II</li>
+      <li data-id="39" class="bloqueado">Fármaco química II</li>
+      <li data-id="40" class="bloqueado">Análisis de la evidencia científica II</li>
+      <li data-id="41" class="bloqueado">Bioquímica clínica II</li>
+      <li data-id="42" class="bloqueado">Práctica atención primaria</li>
+    </ul>
+  </div>
 
-<h2>Octavo Semestre</h2>
-<ul>
-  <li data-id="48" class="bloqueado">Farmacia asistencial</li>
-  <li data-id="49" class="bloqueado">Bioequivalencia</li>
-  <li data-id="50" class="bloqueado">Control de calidad de procesos</li>
-  <li data-id="51" class="bloqueado">Administración y gestión farmacéutica</li>
-  <li data-id="52" class="bloqueado">Farmacia clínica II</li>
-  <li data-id="53" class="bloqueado">Práctica farmacia comunitaria</li>
-</ul>
+  <div class="semestre">
+    <h2>Séptimo Semestre</h2>
+    <ul>
+      <li data-id="43" class="bloqueado">Farmacocinética clínica</li>
+      <li data-id="44" class="bloqueado">Nutrición clínica</li>
+      <li data-id="45" class="bloqueado">Tecnología cosmética</li>
+      <li data-id="46" class="bloqueado">Toxicología</li>
+      <li data-id="47" class="bloqueado">Farmacia clínica I</li>
+    </ul>
+  </div>
 
-<h2>Noveno Semestre</h2>
-<ul>
-  <li data-id="54" class="bloqueado">Internado en farmacia asistencial</li>
-  <li data-id="55" class="bloqueado">Aseguramiento y gestión de calidad</li>
-  <li data-id="56" class="bloqueado">Farmacovigilancia y atención farmacéutica</li>
-  <li data-id="57" class="bloqueado">Legislación farmacéutica y bioética</li>
-  <li data-id="58" class="bloqueado">Seminario de título I</li>
-</ul>
+  <div class="semestre">
+    <h2>Octavo Semestre</h2>
+    <ul>
+      <li data-id="48" class="bloqueado">Farmacia asistencial</li>
+      <li data-id="49" class="bloqueado">Bioequivalencia</li>
+      <li data-id="50" class="bloqueado">Control de calidad de procesos</li>
+      <li data-id="51" class="bloqueado">Administración y gestión farmacéutica</li>
+      <li data-id="52" class="bloqueado">Farmacia clínica II</li>
+      <li data-id="53" class="bloqueado">Práctica farmacia comunitaria</li>
+    </ul>
+  </div>
 
-<h2>Décimo Semestre</h2>
-<ul>
-  <li data-id="59" class="bloqueado">Internado farmacia clínica o industria farmacéutica o industria cosmética</li>
-  <li data-id="60" class="bloqueado">Seminario de título II</li>
-</ul>
+  <div class="semestre">
+    <h2>Noveno Semestre</h2>
+    <ul>
+      <li data-id="54" class="bloqueado">Internado en farmacia asistencial</li>
+      <li data-id="55" class="bloqueado">Aseguramiento y gestión de calidad</li>
+      <li data-id="56" class="bloqueado">Farmacovigilancia y atención farmacéutica</li>
+      <li data-id="57" class="bloqueado">Legislación farmacéutica y bioética</li>
+      <li data-id="58" class="bloqueado">Seminario de título I</li>
+    </ul>
+  </div>
+
+  <div class="semestre">
+    <h2>Décimo Semestre</h2>
+    <ul>
+      <li data-id="59" class="bloqueado">Internado farmacia clínica o industria farmacéutica o industria cosmética</li>
+      <li data-id="60" class="bloqueado">Seminario de título II</li>
+    </ul>
+  </div>
+
+</div>
 
 <script>
   document.querySelectorAll('li').forEach(ramo => {
