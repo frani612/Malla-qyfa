@@ -1,93 +1,71 @@
-const desbloqueos = {
-  1: [12,14,13],
-  4: [8,9,10,11],
-  5: [8,9,10,11],
-  6: [15,16,17,18,19],
+window.addEventListener('DOMContentLoaded', () => {
+  const ramos = Array.from(document.querySelectorAll('li'));
 
-  12: [20],
-  14: [23,24],
-  15: [22],
-  16: [27],
-  17: [28],
-  18: [31,32],
-  19: [31,32],
+  actualizarEstados();
 
-  22: [30,35],
-  23: [33],
-  24: [33],
-  25: [33],
-  26: [33],
-  27: [35,42],
-  28: [30],
+  ramos.forEach(ramo => {
+    ramo.addEventListener('click', () => {
+      if (ramo.classList.contains('bloqueado')) {
+        alert('Este ramo está bloqueado. Completa los prerrequisitos primero.');
+        return;
+      }
 
-  30: [37],
-  31: [41],
-  32: [41],
-  33: [38],
-  34: [39],
-  35: [36],
+      ramo.classList.toggle('tachado');
 
-  37: [42,43,44,45,46,47],
-  38: [45],
-  39: [53],
-  40: [42,47],
-  41: [43,44,46,47],
-  42: [54],
+      actualizarEstados();
+    });
+  });
 
-  43: [49],
-  44: [52],
-  45: [49,50],
-  46: [53,56],
-  47: [52],
+  function actualizarEstados() {
+    ramos.forEach(ramo => {
+      if (ramo.classList.contains('tachado')) {
+        desbloquearRamos(ramo.dataset.abre);
+      }
+    });
 
-  48: [54,58],
-  49: [54,58],
-  50: [54,58,58],
-  51: [53,54,58],
-  52: [56,54,58],
-  53: [57,54,58],
-
-  54: [59,60],
-  55: [59,60],
-  56: [59,60],
-  57: [59,60],
-};
-
-const ramos = document.querySelectorAll('li[data-id]');
-
-function bloquearCascada(ramo) {
-  if (!ramo.classList.contains('bloqueado')) {
-    ramo.classList.add('bloqueado');
-    ramo.classList.remove('tachado');
-    const id = parseInt(ramo.dataset.id);
-    const dependientes = desbloqueos[id] || [];
-    dependientes.forEach(idDep => {
-      const r = document.querySelector(`li[data-id="${idDep}"]`);
-      bloquearCascada(r);
+    ramos.forEach(ramo => {
+      if (!cumplePrerrequisitos(ramo)) {
+        if (!ramo.classList.contains('tachado')) {
+          bloquearRamo(ramo);
+        }
+      } else {
+        desbloquearRamo(ramo);
+      }
     });
   }
-}
 
-ramos.forEach(ramo => {
-  ramo.addEventListener('click', () => {
-    if (ramo.classList.contains('bloqueado')) {
-      alert('Debes completar los prerrequisitos primero.');
-      return;
-    }
-    ramo.classList.toggle('tachado');
-    const id = parseInt(ramo.dataset.id);
-    const desbloqueados = desbloqueos[id] || [];
+  function desbloquearRamos(ids) {
+    if (!ids) return;
+    const idsArray = ids.split(' ');
+    idsArray.forEach(id => {
+      const r = ramos.find(ramo => ramo.dataset.id === id);
+      if (r) desbloquearRamo(r);
+    });
+  }
 
-    if (ramo.classList.contains('tachado')) {
-      desbloqueados.forEach(idDesbloqueado => {
-        const r = document.querySelector(`li[data-id="${idDesbloqueado}"]`);
-        r.classList.remove('bloqueado');
-      });
-    } else {
-      desbloqueados.forEach(idDesbloqueado => {
-        const r = document.querySelector(`li[data-id="${idDesbloqueado}"]`);
-        bloquearCascada(r);
-      });
-    }
-  });
+  function cumplePrerrequisitos(ramo) {
+    const id = ramo.dataset.id;
+
+    const prerrequisitos = ramos.filter(r => {
+      if (!r.dataset.abre) return false;
+      return r.dataset.abre.split(' ').includes(id);
+    });
+
+    if (prerrequisitos.length === 0) return true;
+
+    return prerrequisitos.every(r => r.classList.contains('tachado'));
+  }
+
+  function bloquearRamo(ramo) {
+    ramo.classList.add('bloqueado');
+    ramo.classList.remove('tachado');
+    ramo.style.pointerEvents = 'none';
+    ramo.style.cursor = 'not-allowed';
+  }
+
+  function desbloquearRamo(ramo) {
+    ramo.classList.remove('bloqueado');
+    ramo.style.pointerEvents = 'auto';
+    ramo.style.cursor = 'pointer';
+  }
 });
